@@ -18,6 +18,10 @@ export const UserSchema = new mongoose.Schema(
       required: true,
       minlength: 6, 
     },
+    role:{
+      type: Number,
+      default: 0
+    }
   },
   { timestamps: true }
 );
