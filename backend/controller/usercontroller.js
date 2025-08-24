@@ -30,11 +30,7 @@ export const registerUser = async (req, res) => {
             message: "User registered successfully",
             token,
             sucess: true,
-            user: {
-                id: user._id,
-                username: user.username,
-                email: user.email,
-            }
+            user:user
         })
 
     } catch (error) {
@@ -71,7 +67,6 @@ export const Loginuser = async (req, res) => {
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: 'Server Error', error });
-
     }
 }
 
