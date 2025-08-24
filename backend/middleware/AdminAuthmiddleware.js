@@ -11,20 +11,19 @@ const AdminAuthmiddleware = async (req, res, next) => {
       return res.status(401).json({ message: "No token, authorization denied" });
     }
 
-   
+
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    if (!decoded) {
+      return res.status(401).json({ message: "Token is not valid" });
+    }
+    const admin = await User.findById(decoded.id).select("-password");
 
-   
-    const user = await User.findById(decoded.id).select("-password");
-
-    if (!user) {
+    if (!admin || admin.role !== 1) {
       return res.status(401).json({ message: "Invalid token, user not found" });
     }
 
-
-    req.user = user;
-
     next();
+
   } catch (error) {
     console.error(error);
     res.status(401).json({ message: "Token is not valid" });
