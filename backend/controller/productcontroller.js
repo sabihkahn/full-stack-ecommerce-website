@@ -4,7 +4,7 @@ import Product from "../models/productmodel.js";
 
 export const createProduct = async (req, res) => {
     try {
-        const { name, description, price, img, catogery, brand, stock } = req.body;
+        const { name, description, price, img, catogery, brand, stock, ratings, discount } = req.body;
 
         if (!name || !description || !price || !img || !catogery || !stock) {
             return res.status(400).json({ message: 'All fields are required to create products' })
@@ -17,7 +17,9 @@ export const createProduct = async (req, res) => {
             img,
             catogery,
             brand,
-            stock
+            stock,
+            ratings,
+            discount
         });
         res.status(201).json(
             {
@@ -97,3 +99,48 @@ export const deleteProduct = async (req, res) => {
 
     }
 }
+
+
+export const searchProducts = async (req, res) => {
+    try {
+        const { q } = req.query; 
+        if (!q) {
+            return res.status(400).json({ message: "Search query is required" });
+        }
+
+        const products = await Product.find({
+            $or: [
+                { name: { $regex: q, $options: "i" } },        
+                { description: { $regex: q, $options: "i" } }
+            ]
+        });
+
+        res.json(products);
+    } catch (error) {
+        res.status(500).json({ message: "Error searching products", error });
+    }
+};
+
+
+export const filterProducts = async (req, res) => {
+    try {
+        const { category, minPrice, maxPrice } = req.query;
+
+        let filter = {};
+
+        if (category) {
+            filter.catogery = category
+        }
+
+        if (minPrice || maxPrice) {
+            filter.price = {};
+            if (minPrice) filter.price.$gte = Number(minPrice);
+            if (maxPrice) filter.price.$lte = Number(maxPrice);
+        }
+
+        const products = await Product.find(filter);
+        res.json(products);
+    } catch (error) {
+        res.status(500).json({ message: "Error filtering products", error });
+    }
+};

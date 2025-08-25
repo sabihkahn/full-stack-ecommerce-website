@@ -6,6 +6,8 @@ import ConnectedDB from './config/db.js';
 import userRoute from './routes/userRoute.js'
 import catogeryRoute from './routes/catogeryRoute.js'
 import productRoute from './routes/productRoutes.js'
+import addtocartroute from './routes/addtocart.js';
+import OderRoutes from './routes/OderRoutes.js'
 ConnectedDB()
 const app  = express();
 
@@ -16,7 +18,8 @@ app.use(cors())
 app.use('/',userRoute)
 app.use('/',catogeryRoute)
 app.use('/',productRoute)
-
+app.use('/',addtocartroute)
+app.use('/',OderRoutes)
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
