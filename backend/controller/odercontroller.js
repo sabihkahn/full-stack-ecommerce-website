@@ -6,6 +6,7 @@ import User from "../models/usermodel.js";
 export const createOrder = async (req, res) => {
     try {
         const userId = req.user.id;
+        const {phone,location,zip,city,provience} = req.body
         const user = await User.findById(userId).populate("cart.product");
 
         if (!user || user.cart.length === 0) {
@@ -26,6 +27,11 @@ export const createOrder = async (req, res) => {
             user: userId,
             products,
             totalPrice: total,
+            phone,
+            location,
+            zip,
+            city,
+            provience
         });
 
         await newOrder.save();

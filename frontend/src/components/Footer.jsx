@@ -46,7 +46,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-gray-900 text-gray-300 py-12 px-6 md:px-16 relative">
+    <footer className="bg-black text-gray-300 py-12 px-6 md:px-16 relative">
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
         {/* Brand + Newsletter */}
         <div>

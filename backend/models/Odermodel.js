@@ -1,4 +1,3 @@
-// models/Order.js
 import mongoose from "mongoose";
 
 const orderSchema = new mongoose.Schema({
@@ -29,6 +28,27 @@ const orderSchema = new mongoose.Schema({
     enum: ["pending", "confirmed", "shipped", "delivered", "cancelled"],
     default: "pending",
   },
+  phone: {
+    type: Number,
+    required:true
+  },
+  location: {
+    type: String,
+    required:true
+  },
+  zip: {
+    type: String,
+    required:true
+  },
+  city: {
+    type: String,
+    required:true
+  },
+  provience: {
+    type: String,
+    required:true
+
+  }
 }, { timestamps: true });
 
 export default mongoose.model("Order", orderSchema);

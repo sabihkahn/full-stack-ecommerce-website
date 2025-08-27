@@ -41,7 +41,12 @@ const productSchema = new mongoose.Schema({
     discount:{
         type:Number,
         default:0
-    }
+    },
+    extraimages:[
+        {
+            type:String
+        }
+    ]
 })
 
 export default mongoose.model('Product',productSchema)

@@ -4,7 +4,7 @@ import Product from "../models/productmodel.js";
 
 export const createProduct = async (req, res) => {
     try {
-        const { name, description, price, img, catogery, brand, stock, ratings, discount } = req.body;
+        const { name, description, price, img, catogery, brand, stock, ratings, discount,extraimages } = req.body;
 
         if (!name || !description || !price || !img || !catogery || !stock) {
             return res.status(400).json({ message: 'All fields are required to create products' })
@@ -19,7 +19,8 @@ export const createProduct = async (req, res) => {
             brand,
             stock,
             ratings,
-            discount
+            discount,
+            extraimages
         });
         res.status(201).json(
             {
@@ -144,3 +145,23 @@ export const filterProducts = async (req, res) => {
         res.status(500).json({ message: "Error filtering products", error });
     }
 };
+
+export const getSingleproduct = async (req, res) => {
+    try {
+        const { id } = req.params;
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(404).json({
+                message: 'Category not found'
+            });
+        }
+        const getSingleproduct = await Product.findById(id)
+        res.status(200).json({
+            message: 'Category products fetched successfully',
+            products: getSingleproduct
+        })
+
+    } catch (error) {
+        console.error('Error fetching category products:', error);
+        res.status(500).json({ message: 'Cant fetch category products' });
+    }
+}

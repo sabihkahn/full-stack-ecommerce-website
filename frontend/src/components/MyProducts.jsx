@@ -52,7 +52,7 @@ const MyProducts = () => {
                 className="w-56 h-56 object-cover rounded-lg shadow-md group-hover:scale-110 transition-transform duration-300"
               />
             </div>
-            <h4 className="mt-5 w-full text-center text-black font-semibold py-2 rounded-full transition text-center">
+            <h4 className="mt-5 w-full  text-black font-semibold py-2 rounded-full transition text-center">
              Jorden boots 
             </h4>
           </div>

@@ -6,6 +6,9 @@ import Contact from './pages/Conactus'
 import Shop from './pages/Shop'
 import Register from './pages/Register'
 import Login from './pages/Login'
+import Profile from './pages/Profile'
+import ProductDetail from './pages/ProductDetail'
+import Chexkout from './pages/Chexkout'
 const App = () => {
   return (
     <>
@@ -16,6 +19,10 @@ const App = () => {
         <Route path='/shop' element={<Shop />} />
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />
+        <Route path='/profile' element={<Profile />} />
+        <Route path='/product/:id' element={<ProductDetail />} />
+        <Route path='/checkout' element={<Chexkout />} />
+
        </Routes>
 
     </>
