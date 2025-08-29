@@ -71,3 +71,12 @@ export const updateOrderStatus = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+export const totaloders = async(req,res)=>{
+    try {
+        const totaloders = (await Order.find({})).length
+        res.status(200).send({message:"toal oder are fetched",totaloders})
+    } catch (error) {
+       console.log(error) 
+       res.status(500).send({message:"CANT GET TOTAL ODERS"})
+    }
+}

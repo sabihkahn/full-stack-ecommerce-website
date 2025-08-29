@@ -9,6 +9,7 @@ import Footer from "../components/Footer";
 const ProductDetail = () => {
     const { id } = useParams();
     const [product, setProduct] = useState(null);
+    const [showeratingpopup, setshoweratingpopup] = useState(false)
     const [loading, setLoading] = useState(true);
     const [mainImage, setMainImage] = useState("");
     const user = localStorage.getItem('user')
@@ -17,8 +18,47 @@ const ProductDetail = () => {
     const [productid, setproductid] = useState('')
     const [quantity, setQuantity] = useState(1);
     const [popup, setpopup] = useState(false)
+    const [againgivingstart, setagaingivingstart] = useState(false)
     const navigate = useNavigate()
     console.log(userid);
+
+    // inside ProductDetail component:
+    const [rating, setRating] = useState(0);
+    const [hover, setHover] = useState(null);
+
+    // ⭐ submit rating API
+    const submitRating = async () => {
+        try {
+            await axios.post(
+                `${import.meta.env.VITE_BASE_URL}/updaterating/${productid}/${userid}`,
+                { rating }
+            );
+
+            setshoweratingpopup(true);
+
+          
+            setTimeout(() => {
+                setshoweratingpopup(false);
+            }, 2000);
+
+            
+            setProduct((prev) => ({
+                ...prev,
+                ratings: ((prev.ratings * prev.allrating?.length + rating) / ((prev.allrating?.length || 0) + 1)).toFixed(1)
+            }));
+
+        } catch (error) {
+            console.error(error);
+
+            setagaingivingstart(true);
+            setTimeout(() => {
+                setagaingivingstart(false);
+            }, 2000);
+        }
+    };
+
+
+
 
     useEffect(() => {
 
@@ -87,10 +127,10 @@ const ProductDetail = () => {
 
     return (
         <>
-        <div className="mb-34">
+            <div className="mb-34">
 
-            <Navbar   />
-        </div>
+                <Navbar />
+            </div>
             <div className="p-6 mt-24 mb-23 max-w-5xl mx-auto bg-white shadow-xl rounded-2xl grid grid-cols-1 md:grid-cols-2 gap-8">
 
                 <div>
@@ -150,9 +190,50 @@ const ProductDetail = () => {
                     </div>
 
 
+
                     <button onClick={addtocart} className="mt-6 w-full py-3 bg-black text-white rounded-xl text-lg font-medium hover:bg-gray-800 transition">
                         Add to Cart
                     </button>
+                    <div className="mt-4">
+                        <h3 className="font-semibold mb-2">Rate this Product:</h3>
+                        <div className="flex items-center gap-2">
+                            {[...Array(5)].map((star, index) => {
+                                const ratingValue = index + 1;
+                                return (
+                                    <label key={index}>
+                                        <input
+                                            type="radio"
+                                            name="rating"
+                                            value={ratingValue}
+                                            onClick={() => setRating(ratingValue)}
+                                            className="hidden"
+                                        />
+                                        <FaStar
+                                            size={30}
+                                            className="cursor-pointer transition-colors"
+                                            color={
+                                                ratingValue <= (hover || rating)
+                                                    ? "#ffc107"
+                                                    : "#1C1C1C"
+                                            }
+                                            onMouseEnter={() => setHover(ratingValue)}
+                                            onMouseLeave={() => setHover(null)}
+                                        />
+                                    </label>
+                                );
+                            })}
+                        </div>
+
+                        {rating > 0 && (
+                            <button
+                                onClick={submitRating}
+                                className="mt-3 px-5 py-2 bg-yellow-300 hover:bg-yellow-400 text-black rounded-lg"
+                            >
+                                Submit Rating ({rating}⭐)
+                            </button>
+                        )}
+                    </div>
+
                 </div>
                 <div className="flex items-center gap-4">
 
@@ -178,6 +259,13 @@ const ProductDetail = () => {
             {popup ? <div className="fixed top-24 right-5 bg-green-500 text-white px-6 py-3 rounded-2xl shadow-lg text-lg font-medium flex items-center gap-2 animate-bounce">
                 ✅ Product added to cart successfully!
             </div> : ""}
+            {showeratingpopup ? <div className="fixed top-24 right-5 bg-green-500 text-white px-6 py-3 rounded-2xl shadow-lg text-lg font-medium flex items-center gap-2 animate-bounce">
+                rating added sucessfully
+            </div> : ""}
+            {againgivingstart ? <div className="fixed top-24 right-5 bg-red-500 text-white px-6 py-3 rounded-2xl shadow-lg text-lg font-medium flex items-center gap-2 animate-bounce">
+                you already added rating
+            </div> : ""}
+
             <Footer />
         </>
     );

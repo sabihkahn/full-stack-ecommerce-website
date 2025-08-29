@@ -9,6 +9,8 @@ import Login from './pages/Login'
 import Profile from './pages/Profile'
 import ProductDetail from './pages/ProductDetail'
 import Chexkout from './pages/Chexkout'
+import AdminPannel from './admin/adminpages/AdminPannel'
+import CheckisLogined from './Auth/CheckisLogined'
 const App = () => {
   return (
     <>
@@ -16,14 +18,29 @@ const App = () => {
         <Route path='/' element={<HomePage />} />
         <Route path='/aboutus' element={<Aboutus />} />
         <Route path='/contact' element={<Contact />} />
-        <Route path='/shop' element={<Shop />} />
+
+        <Route path='/shop' element={
+          <CheckisLogined>
+            <Shop />
+          </CheckisLogined>
+        } />
+
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />
-        <Route path='/profile' element={<Profile />} />
-        <Route path='/product/:id' element={<ProductDetail />} />
-        <Route path='/checkout' element={<Chexkout />} />
+        <Route path='/profile' element={
+          <CheckisLogined>
 
-       </Routes>
+            <Profile />
+          </CheckisLogined>
+        } />
+        <Route path='/product/:id' element={
+          <CheckisLogined>
+            <ProductDetail />
+          </CheckisLogined>
+        } />
+        <Route path='/checkout' element={<CheckisLogined><Chexkout /></CheckisLogined>} />
+        <Route path='/admin' element={<CheckisLogined><AdminPannel /></CheckisLogined>} />
+      </Routes>
 
     </>
   )

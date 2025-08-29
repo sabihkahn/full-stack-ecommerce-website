@@ -21,11 +21,15 @@ const Login = () => {
         headers: { "Content-Type": "application/json" },
       });
 
-      // Save token and user info in localStorage
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(data.user));
+       
+       if (data.user.role === 1) {
+      navigate("/admin")
+    } else {
+      navigate("/")      
+    }
 
-      navigate("/"); // Redirect to home page
     } catch (err) {
       setError(err.response?.data?.message || "Invalid credentials");
     } finally {

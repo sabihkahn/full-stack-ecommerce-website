@@ -3,50 +3,57 @@ import express from "express";
 
 
 const productSchema = new mongoose.Schema({
-    name:{
-        type:String,
-        required:true,
-      
+    name: {
+        type: String,
+        required: true,
+
     },
-    description:{
-        type:String,
-        required:true,
+    description: {
+        type: String,
+        required: true,
     },
-    price:{
-        type:Number,
-        required:true,
+    price: {
+        type: Number,
+        required: true,
     },
-    img:{
-        type:String,
-        required:true
+    img: {
+        type: String,
+        required: true
     },
-    catogery:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'Catogery',
-        required:true
+    catogery: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Catogery',
+        required: true
     },
-    brand:{
-        type:String,
-        
+    brand: {
+        type: String,
+
     },
-    stock:{
-        type:Number,
-        required:true,
-        default:0
+    stock: {
+        type: Number,
+        required: true,
+        default: 0
     },
-    ratings:{
-        type:Number,
-        default:0
+    ratings: {
+        type: Number,
+        default: 0
     },
-    discount:{
-        type:Number,
-        default:0
+    allrating: [
+  {
+    user: { type: mongoose.Schema.Types.ObjectId, ref: "User4" },
+    value: { type: Number, min: 1, max: 5 }
+  }
+],
+
+    discount: {
+        type: Number,
+        default: 0
     },
-    extraimages:[
+    extraimages: [
         {
-            type:String
+            type: String
         }
     ]
 })
 
-export default mongoose.model('Product',productSchema)
+export default mongoose.model('Product', productSchema)

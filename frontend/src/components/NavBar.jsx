@@ -155,7 +155,7 @@ const Navbar = () => {
           )}
         </div>
 
-        {/* Footer */}
+ 
         <div className="p-4 border-t">
           <div className="flex justify-between font-bold text-lg">
             <span>Total:</span>
@@ -221,6 +221,7 @@ const Navbar = () => {
                 className="cursor-pointer flex justify-center items-center text-xl bg-white text-black border-2 border-black p-3 rounded-xl"
                 onClick={() => {
                   localStorage.removeItem("token");
+                  localStorage.clear()
                   setToken(null);
                 }}
               >
