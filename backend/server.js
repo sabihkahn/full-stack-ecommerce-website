@@ -8,6 +8,7 @@ import catogeryRoute from './routes/catogeryRoute.js'
 import productRoute from './routes/productRoutes.js'
 import addtocartroute from './routes/addtocart.js';
 import OderRoutes from './routes/OderRoutes.js'
+import AiRoute from './routes/AiRoute.js'
 ConnectedDB()
 const app  = express();
 
@@ -20,6 +21,7 @@ app.use('/',catogeryRoute)
 app.use('/',productRoute)
 app.use('/',addtocartroute)
 app.use('/',OderRoutes)
+app.use('/',AiRoute)
 
 app.get('/', (req, res) => {
   res.send('Hello World!');

@@ -84,14 +84,20 @@ export const totaloders = async(req,res)=>{
 
 export const getAllPrices = async (req,res)=>{
     try {
-        const price = (await Order.find({})).filter((e)=>{
-          return e.totalPrice > 0
+        const price = (await Order.find({})).map((e)=>{
+          return e.totalPrice 
 
         })
+        let newarr = []
+        
         let sum = 0 
+
         for(let i = 0; i< price.length; i++){
             sum = sum + price[i]
         }
+
+       res.status(200).send({message:"all prices are getted",sales:sum,pricesoder:price})
+
         
     } catch (error) {
         console.log(error);
@@ -104,9 +110,9 @@ export const getpendingOder = async(req,res)=>{
     try {
        
         const pendingoder = (await Order.find({})).filter((e)=>{
-            return e.pendingoder
-            
+            return e.status = "pending"
         })
+        res.status(200).send({message:'pending oder fetched successfully',pendingOders:pendingoder})
         
        
     } catch (error) {
