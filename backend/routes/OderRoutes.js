@@ -8,4 +8,5 @@ router.post('/create-oder',authMiddleware, createOrder)
 router.get('/all-oders', AdminAuthmiddleware, getAllOrders);
 router.put('/update-oder/:id', AdminAuthmiddleware, updateOrderStatus);
 router.get('/totaloders',totaloders)
+router.get('/getallprices',getAllPrices)
 export default router;

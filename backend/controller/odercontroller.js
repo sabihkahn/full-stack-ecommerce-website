@@ -71,6 +71,7 @@ export const updateOrderStatus = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
 export const totaloders = async(req,res)=>{
     try {
         const totaloders = (await Order.find({})).length
@@ -78,5 +79,39 @@ export const totaloders = async(req,res)=>{
     } catch (error) {
        console.log(error) 
        res.status(500).send({message:"CANT GET TOTAL ODERS"})
+    }
+}
+
+export const getAllPrices = async (req,res)=>{
+    try {
+        const price = (await Order.find({})).filter((e)=>{
+          return e.totalPrice > 0
+
+        })
+        let sum = 0 
+        for(let i = 0; i< price.length; i++){
+            sum = sum + price[i]
+        }
+        
+    } catch (error) {
+        console.log(error);
+        res.status(200).send({message:"cant get all pices"})
+
+    }
+}
+
+export const getpendingOder = async(req,res)=>{
+    try {
+       
+        const pendingoder = (await Order.find({})).filter((e)=>{
+            return e.pendingoder
+            
+        })
+        
+       
+    } catch (error) {
+        console.log(error);
+        res.status(200).send({message:"cant get pending oders"})
+        
     }
 }

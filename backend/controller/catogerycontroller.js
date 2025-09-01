@@ -91,3 +91,15 @@ export const deleteCatogery = async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 }
+export const totalcatogries = async (req,res) =>{
+try {
+  const totalcatogries = (await Catogery.find({})).length
+  res.status(200).send({totalcatogries:totalcatogries})
+  
+} catch (error) {
+  console.log(error);
+  res.status(500).send({message:"cant get total catogries"})
+  
+}
+
+}
