@@ -56,7 +56,7 @@ const BarChart = ({ prices }) => {
   }
 
   return (
-    <div className="relative w-full h-[400px]">
+    <div className="relative w-full h-[350px]">
       <Bar options={options} data={data} />
     </div>
   )

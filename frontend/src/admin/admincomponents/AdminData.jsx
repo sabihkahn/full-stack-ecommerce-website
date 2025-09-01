@@ -71,7 +71,7 @@ const AdminData = () => {
   }, []);
 
   return (
-    <div className="w-full h-full p-6 bg-gradient-to-br from-gray-50 via-gray-100 to-gray-200 overflow-y-auto">
+    <div className="w-full  h-full p-6 bg-gradient-to-br from-gray-50 via-gray-100 to-gray-200 overflow-y-scroll">
       {/* Top Stats Row */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
         <div className="p-6 shadow-lg rounded-2xl bg-white hover:shadow-2xl transition">
@@ -97,7 +97,7 @@ const AdminData = () => {
         <label className="block mb-3 text-sm font-medium text-gray-700">
           Ask AI for Top Products
         </label>
-        <div className="flex gap-3">
+        <div className="flex flex-col gap-3">
           <input
             value={Prompt}
             type="text"
