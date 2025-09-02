@@ -20,7 +20,7 @@ const ProductDetail = () => {
     const [popup, setpopup] = useState(false)
     const [againgivingstart, setagaingivingstart] = useState(false)
     const navigate = useNavigate()
-    console.log(userid);
+   
 
     // inside ProductDetail component:
     const [rating, setRating] = useState(0);
@@ -70,7 +70,7 @@ const ProductDetail = () => {
                 setProduct(res.data.products);
                 setMainImage(res.data.products.img);
                 setproductid(res.data.products._id)
-                console.log("Product:", res.data.products);
+             
             } catch (error) {
                 console.error(error);
             } finally {

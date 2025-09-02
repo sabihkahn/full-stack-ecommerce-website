@@ -4,7 +4,7 @@ import Order from "../models/Odermodel.js";
 import User from "../models/usermodel.js";
 
 export const createOrder = async (req, res) => {
-    try {
+    try { 
         const userId = req.user.id;
         const {phone,location,zip,city,provience} = req.body
         const user = await User.findById(userId).populate("cart.product");
@@ -109,9 +109,8 @@ export const getAllPrices = async (req,res)=>{
 export const getpendingOder = async(req,res)=>{
     try {
        
-        const pendingoder = (await Order.find({})).filter((e)=>{
-            return e.status = "pending"
-        })
+        const pendingoder = (await Order.find({ status: "pending" }))
+        
         res.status(200).send({message:'pending oder fetched successfully',pendingOders:pendingoder})
         
        

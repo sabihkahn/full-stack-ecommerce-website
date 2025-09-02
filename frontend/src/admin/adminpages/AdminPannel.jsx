@@ -7,7 +7,7 @@ import ManageProducts from "../admincomponents/ManageProducts";
 import CreateProducts from "../admincomponents/CreateProducts";
 import ManageCatogries from "../admincomponents/ManageCatogries";
 import Oders from "../admincomponents/Oders";
-import PendingOders from "../admincomponents/PendingOders";
+
 import AllOders from "../admincomponents/Alloders";
 
 const AdminPannel = () => {
@@ -33,8 +33,6 @@ const AdminPannel = () => {
         return <ManageProducts />;
       case "Orders":
         return <Oders />;
-      case "Pending Orders":
-        return <PendingOders />;
       case "Categories":
         return <ManageCatogries />;
       case "All Orders":

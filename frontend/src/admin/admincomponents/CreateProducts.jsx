@@ -152,7 +152,7 @@ export default function CreateProduct() {
 
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-3xl bg-white shadow-lg rounded-2xl p-6 border border-gray-200 flex flex-col gap-6 h-[90vh] overflow-y-scroll"
+        className="w-full max-w-3xl bg-white shadow-lg rounded-2xl p-8 border border-gray-200 flex flex-col gap-6 h-[90vh] overflow-y-scroll "
       >
         <h2 className="text-3xl font-bold text-gray-800 text-center">Create Product</h2>
 
@@ -169,12 +169,12 @@ export default function CreateProduct() {
               Upload Main Image
             </div>
           )}
-          <div className="flex gap-3 w-full">
+          <div className="flex gap-0 w-full">
             <input type="file" onChange={(e) => setMainImage(e.target.files[0])} className="flex-1" />
             <button
               type="button"
               onClick={handleMainImageUpload}
-              className="bg-black text-white px-4 py-2 rounded-xl hover:bg-gray-800 transition"
+              className="bg-black text-white px-2 right-2 relative py-2 rounded-xl hover:bg-gray-800 transition"
             >
               Upload
             </button>
@@ -269,7 +269,7 @@ export default function CreateProduct() {
         {/* Extra Images */}
         <div>
           <span className="font-medium">Extra Images (Min 3)</span>
-          <div className="flex gap-3 mt-2">
+          <div className="flex gap-0 mt-2">
             <input
               type="file"
               multiple
@@ -281,9 +281,9 @@ export default function CreateProduct() {
             <button
               type="button"
               onClick={handleExtraImagesUpload}
-              className="bg-black text-white px-4 py-2 rounded-xl hover:bg-gray-800 transition"
+              className="bg-black text-white relative right-7 px-4 py-2 rounded-xl hover:bg-gray-800 transition"
             >
-              Upload All
+              Upload
             </button>
           </div>
           {extraImageURLs.length > 0 && (

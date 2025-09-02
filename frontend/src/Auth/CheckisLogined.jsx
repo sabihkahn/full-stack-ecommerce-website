@@ -4,6 +4,9 @@ import axios from "axios";
 const CheckisLogined = ({ children }) => {
     const navigate = useNavigate();
     const token = localStorage.getItem("token") || "";
+    if(!token){
+        navigate('/login')
+    }
 
     const fetchProfileData = async () => {
         try {
@@ -14,7 +17,8 @@ const CheckisLogined = ({ children }) => {
                         Authorization: `${token}`,
                     },
                 }
-            );
+            ).catch((err)=>{localStorage.clear()})
+            console.log(response)
 
             if (response.data.user.role == 0) {
                 console.log(response.data.user);
@@ -23,6 +27,7 @@ const CheckisLogined = ({ children }) => {
                 navigate('/admin')
             }
             else {
+                localStorage.clear()
                 console.error("Failed to fetch profile data");
                 navigate('/login')
             }

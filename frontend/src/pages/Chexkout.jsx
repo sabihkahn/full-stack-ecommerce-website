@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Navbar from "../components/NavBar";
 import Footer from "../components/Footer";
+import { useNavigate } from "react-router-dom";
 
 const Chexkout = () => {
   const [formData, setFormData] = useState({
@@ -11,7 +12,7 @@ const Chexkout = () => {
     city: "",
     provience: "",
   });
-
+  const navigate = useNavigate()
   const [popup, setPopup] = useState(false);
   const [errors, setErrors] = useState([]);
   const token = localStorage.getItem("token");
@@ -103,7 +104,11 @@ const Chexkout = () => {
           zip: "",
           city: "",
           provience: "",
-        });
+        },
+      setTimeout(() => {
+        navigate('/shop')
+      }, 1000)
+      );
         setErrors([]);
         setTimeout(() => setPopup(false), 3000);
       }
