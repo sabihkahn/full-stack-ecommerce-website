@@ -45,10 +45,10 @@ const BarChart = ({ prices }) => {
   }
 
   const data = {
-    labels: prices.map((_, i) => `Product ${i + 1}`),
+    labels: prices.map((_, i) => `Oder ${i + 1}`),
     datasets: [
       {
-        label: 'Products Prices',
+        label: 'oders Prices',
         data: prices,
         backgroundColor: getRandomColors(prices.length),
       },
