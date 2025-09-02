@@ -60,7 +60,7 @@ const Chexkout = () => {
     if (formData.location.length <= 4) {
       newErrors.push("Street Address must be more than 4 characters.");
     }
-    if (formData.zip.length <= 4) {
+    if (formData.zip.length <= 3) {
       newErrors.push("Zip Code must be more than 4 characters.");
     }
     if (formData.city.length <= 4) {
